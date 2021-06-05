@@ -1,0 +1,241 @@
+<html>
+    <head>
+        <title>Danfe</title>
+        <meta charset="utf-8"/>
+        <style>
+            tr {line-height:7px;}
+        </style>
+    </head>
+    <body>
+            <table style="left:0cm;  margin-right:0.1cm; width:29.7cm" align="left">
+                <tbody>
+
+                <tr>
+                        <td colspan="2" style="font-size:12px; white-space: nowrap;" align="center">
+                            <b>[#FANTASIAEMPRESA#]</b>
+                        </td>
+                </tr>
+
+                <tr>
+                        <td colspan="2" style="font-size:10px; white-space: nowrap;" align="center">
+                                <b>[#NOMEEMPRESA#]</b>
+                        </td>	
+                </tr>
+
+                <tr>
+                        <td colspan="2" style="font-size:9px; white-space: nowrap;" align="center">
+                                [#ENDEMPRESA#], [#CIDADEUFEMPRESA#]
+                        </td>
+                </tr>
+                <tr>
+                        <td colspan="2" style="font-size:8px; white-space: nowrap;" align="center">
+                    [#CNPJEMPRESA#] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <b> [#TELEFONEEMPRESA#] </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [#IEEMPRESA#]
+
+                        </td>
+                </tr>        
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; max-height: 1px; width: 100%; background-color: black;" align="center"></td></tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 1px; width: 100%; " align="center"></td></tr>
+                <tr>
+                    <td colspan="2" style="font-family:Calibri; font-weight: bold; font-size: 8px; font-weight: bold; white-space: nowrap; line-break: loose;" align="center">
+                        DANFE NFC-e - Documento Auxiliar da Nota Fiscal Eletrônica para Consumidor Final.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" style="font-size:6; white-space: nowrap;" align="center">
+        
+                        <table style="width:100%; margin-bottom: -2px">                    
+                            <tr><td colspan="7" style="font-size:6; white-space: nowrap; max-height: 1px; width: 100%; background-color: black;" align="center"></td></tr>
+                            <tr><td colspan="7" style="font-size:10; white-space: nowrap; height: 2px; width: 100%; " align="center"></td></tr>
+                            <tr style="width:100%">
+                                <td style="font-family:Calibri;font-size:8; white-space: nowrap;font-weight:bold; width: 30%" align="center">CÓDIGO</td>
+                                <td style="font-family:Calibri;font-size:8; white-space: nowrap;font-weight:bold; width: 25%" align="center" colspan="5">DESCRIÇÃO</td>                                
+                            </tr>
+                            <tr style="width:100%">
+                                <td style="font-family:Calibri;font-size:8; white-space: nowrap;font-weight:bold" align="center">QTD</td>
+                                <td style="font-family:Calibri;font-size:8; white-space: nowrap;font-weight:bold" align="center">UN</td>
+                                <td style="font-family:Calibri;font-size:8; white-space: nowrap;font-weight:bold" align="center">VL UNIT</td>
+                                <td style="font-family:Calibri;font-size:8; white-space: nowrap;font-weight:bold" align="center">VL PROMO</td>
+                                <td style="font-family:Calibri;font-size:8; white-space: nowrap;font-weight:bold" align="center">DESC</td>
+                                <td style="font-family:Calibri;font-size:8; white-space: nowrap;font-weight:bold" align="center">ACRES</td>
+                                <td style="font-family:Calibri;font-size:8; white-space: nowrap;font-weight:bold" align="center">VL TOT</td>
+                            </tr>
+                            <tr><td colspan="7" style="font-size:10; white-space: nowrap; height: 2px; width: 100%; " align="center"></td></tr>
+                            <tr><td colspan="7" style="font-size:6; white-space: nowrap; max-height: 1px; width: 100%; background-color: black;" align="center"></td></tr>
+                            <tr><td colspan="7" style="font-size:10; white-space: nowrap; height: 2px; width: 100%; " align="center"></td></tr>
+                            [#DET#]
+
+                        </table>
+                    </td>
+                </tr>
+
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 1px; width: 100%; " align="center"></td></tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; max-height: 1px; width: 100%; background-color: black;" align="center"></td></tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 1px; width: 100%; " align="center"></td></tr>
+
+                <tr>
+                    <td colspan="2" style="font-size:6; white-space: nowrap;" align="center">
+                    <table style="width:100%; margin-bottom: -2px">                    
+                        <tr>
+                            <td  style="font-family: Calibri;font-size:10; white-space: nowrap;" align="left">
+                                QTD TOTAL ITENS
+                            </td>
+                            <td style="font-family: Calibri;font-size:10; white-space: nowrap;" align="right">
+                                [#QTDEITENS#]
+                            </td>  
+                            <td style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold" align="center">
+                                Consulta via leitor QR Code
+                            </td>                            
+                        </tr>
+                        <tr>
+                            <td  style="font-family:Calibri;font-size:10; white-space: nowrap;" align="left">
+                                SUBTOTAL
+                            </td>
+                            <td  style="font-family:Calibri;font-size:10; white-space: nowrap;" align="right">
+                                R$ [#SUBTOTAL#]
+                            </td>
+                            <td rowspan="9" style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold" align="center">
+                                <img src="[#QRCODE#]" style="width:3cm; height: 3cm"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="font-family: Calibri;font-size:10; white-space: nowrap;font-weight: bold;" align="left">
+                                VALOR TOTAL
+                            </td>
+                            <td colspan="1" style="font-family: Calibri;font-size:10; white-space: nowrap;font-weight: bold;" align="right">
+                                R$ [#VALORTOTAL#]
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="font-family: Calibri;font-size:10; white-space: nowrap;" align="left">
+                                [#TITULO_DESCONTO#]
+                            </td>
+                            <td colspan="1" style="font-family: Calibri;font-size:10; white-space: nowrap;" align="right">
+                                R$ [#DESCONTO#]
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="font-family: Calibri;font-size:10; white-space: nowrap;" align="left">
+                                FORMA PAGAMENTO
+                            </td>
+                            <td colspan="1" style="font-family: Calibri;font-size:10; white-space: nowrap;" align="right">
+                                VALOR PAGO
+                            </td>
+                        </tr>
+                                [#PAGAMENTOS#]
+                        <tr>
+                            <td colspan="1" style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold" align="left">
+                                TROCO
+                            </td>
+                            <td colspan="1" style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold" align="right">
+                                R$ [#TROCO#]
+                            </td>
+                        </tr>
+                         <tr>
+                            <td colspan="1" style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold" align="left">                                
+                            </td>
+                            <td colspan="1" style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold" align="right">                                
+                            </td>
+                        </tr>
+                         <tr>
+                            <td colspan="1" style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold" align="left">                                
+                            </td>
+                            <td colspan="1" style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold" align="right">                                
+                            </td>
+                        </tr>
+                         <tr>
+                            <td colspan="1" style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold" align="left">                                
+                            </td>
+                            <td colspan="1" style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold" align="right">                                
+                            </td>
+                        </tr>
+                    </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-family:Calibri;font-size:10; white-space: nowrap;" align="center">
+                        Consulte pela <b> CHAVE DE ACESSO </b> em [#URLCONSULTA#]
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold" align="center">
+                        [#CHNFE#]
+                    </td>
+                </tr>   
+                <tr>                    
+                    <td colspan="1" style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold" align="left">
+                        Protocolo de Aut.:
+                    </td>
+                    <td colspan="1" style="font-family:Impact;font-size:10; white-space: nowrap;" align="left">
+                        [#RECIBO#]
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center" style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold">
+                        [#DESCRICAOCONTINGENCIA#]
+                    </td>
+                </tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 1px; width: 100%; " align="center"></td></tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; max-height: 1px; width: 100%; background-color: black;" align="center"></td></tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 1px; width: 100%; " align="center"></td></tr>
+                <tr>
+                    <td colspan="2" style="font-family:Impact;font-size:10; white-space: nowrap;" align="left">
+                        CONSUMIDOR: [#CONSUMIDOR#] - [#NOMECONSUMIDOR#]
+                    </td>                    
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size:10; white-space: nowrap;" align="center">                
+                        <table style="width:100%; margin-top: 1px; margin-bottom: -2px">
+                            <tr style="width:100%">
+                                <td style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold" align="center">Nº [#NNF#]</td>
+                                <td style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold" align="center">SÉRIE: [#SERIE#]</td>
+                                <td style="font-family:Calibri;font-size:10; white-space: nowrap;font-weight:bold" align="center">[#DTEMIS#]</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 1px; width: 100%; " align="center"></td></tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; max-height: 1px; width: 100%; background-color: black;" align="center"></td></tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 1px; width: 100%; " align="center"></td></tr>
+                <tr>
+                    <td colspan="2" style="font-family:Calibri; font-size: 8px; white-space:nowrap;" align="left">
+                        <b>  Tributos Totais Incidentes(Lei Federal 12.741/2012)   R$ [#TRIBUTOSTOTAIS#] </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-family:Calibri; font-size: 8px; white-space:nowrap;" align="left">
+                        <b> [#IBPT#] </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="1" style="font-family:Calibri; font-size: 8px; white-space:nowrap;" align="left">                        
+                        [#MSGCAIXA#]
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="1" style="font-family:Calibri; font-size: 8px; white-space:nowrap;" align="left">
+                        Você foi atendido por: [#INFOSCAIXA#]
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-family:Calibri; font-size: 8px; white-space:nowrap;" align="left">
+                        Sistema: Arena PDV / Versão [#VERSAOARENA#]
+                    </td>
+                </tr>          
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 1px; width: 100%; " align="center"></td></tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; max-height: 1px; width: 100%; background-color: black;" align="center"></td></tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 1px; width: 100%; " align="center"></td></tr>                                
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 1px; width: 100%; " align="center"><br/></td></tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 1px; width: 100%; " align="center"><br/></td></tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 4px; width: 100%; " align="center"><br/></td></tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 4px; width: 100%; " align="center"><br/></td></tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 4px; width: 100%; " align="center"><br/></td></tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 4px; width: 100%; " align="center"><br/></td></tr>
+                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 4px; width: 100%; " align="center"><br/></td></tr>
+                <!--<tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 4px; width: 100%; " align="center">.</td></tr>-->
+                <!--<tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 4px; width: 100%; " align="center"><br/></td></tr>-->
+<!--                <tr><td colspan="2" style="font-size:10; white-space: nowrap; height: 4px; width: 100%; " align="center">.</td></tr>-->
+                </tbody>
+        </table>		
+    </body>
+</html>
