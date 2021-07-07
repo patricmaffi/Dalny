@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, ScrollView, Dimensions, StyleSheet } from "react-native";
-import { Container, Text } from "native-base";
+import { Button, Container, Text, View } from "native-base";
 import Background from "../../components/Background";
 import { useSelector, useDispatch } from "react-redux";
 import { loadConfig } from "../Configuracao/ConfigAction";
@@ -9,16 +9,16 @@ import GraficoFaturamento from "./GraficoFaturamento";
 import Loading from "../../components/Loading";
 import * as Font from "expo-font";
 import { sendEmail } from "../../components/Utils";
-import { loadSeller } from "../Pedido/PedidoAction";
+import { loadSeller, newOrder } from "../Pedido/PedidoAction";
+import commonStyles from "../../commonStyles";
 
 const Dashboard = ({ navigation }) => {
     const dispatch = useDispatch();
     const config = useSelector((state) => state.config);
     const seller = useSelector((state) => state.pedido.seller);
-    const auth = useSelector((state) => state.auth);
     const [data, setData] = useState({ fontLoaded: false });
-    console.log("xxxxxxxxxxxxxx DASHBOARD APP GERENCIAL xxxxxxxxxxxxxxx");
-    console.log(auth);
+    console.log("xxxxxxxxxxxxxx TELA INICIAL xxxxxxxxxxxxxxx");
+
     let updateData = () => {
         setData(Object.assign({}, data));
     };
@@ -41,12 +41,6 @@ const Dashboard = ({ navigation }) => {
             loadSeller(dispatch);
         }
     };
-    // let _loadConfig = async () => {
-    //     if (!config.url) {
-    //         dispatch(await loadConfig());
-    //     }
-    // };
-
     useEffect(() => {
         loadFonts();
         _loadVendedor();
@@ -59,16 +53,26 @@ const Dashboard = ({ navigation }) => {
         <Container style={{ paddingTop: 10 }}>
             <Background navigation={navigation} showlogo={true}>
                 <SafeAreaView style={{ flex: 9, top: 0 }}>
-                    <ScrollView
+                    <View style={{ flex: 9 }}></View>
+                    <Button
                         style={{
-                            flex: 15,
-                            paddingHorizontal: 20,
-                            flexDirection: "row",
+                            justifyContent: "center",
+                            backgroundColor: commonStyles.colors.buttonGreen,
+                            borderRadius: 8,
+                            borderTopEndRadius: 0,
+                            borderTopStartRadius: 0,
+                            height: 50,
+                            marginHorizontal: 40,
+                            marginTop: -5,
+                            marginBottom: 55,
+                        }}
+                        onPressOut={() => {
+                            dispatch(newOrder());
+                            navigation.navigate("Modelo");
                         }}
                     >
-                        {/* <GraficoFaturamento></GraficoFaturamento>
-                        <GraficoEntSai></GraficoEntSai> */}
-                    </ScrollView>
+                        <Text style={{ textAlign: "center" }}>Novo Pedido</Text>
+                    </Button>
                 </SafeAreaView>
             </Background>
         </Container>

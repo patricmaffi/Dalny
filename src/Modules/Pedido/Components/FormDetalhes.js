@@ -45,6 +45,12 @@ const FormDetalhes = ({ navigation }) => {
                 ></FormCamisaSocialFeminina>
             );
             break;
+        case 9:
+            jsxBody = <FormTouca modelo={data.modelo}></FormTouca>;
+            break;
+        case 11:
+            jsxBody = <FormTouca modelo={data.modelo}></FormTouca>;
+            break;
 
         default:
             jsxBody = (
@@ -68,6 +74,18 @@ const FormCamisaSocialMasculina = ({ sizes, modelo }) => {
             {!modelo.tamanhosExtra ? null : (
                 <CardTamanhosExtra modelo={modelo}></CardTamanhosExtra>
             )}
+            <CardObservacoes modelo={modelo}></CardObservacoes>
+            <CardODetalhes modelo={modelo}></CardODetalhes>
+            <CardTotal modelo={modelo}></CardTotal>
+        </>
+    );
+};
+const FormTouca = ({ sizes, modelo }) => {
+    return (
+        <>
+            <CardModelo modelo={modelo}></CardModelo>
+            <CardTecidos modelo={modelo}></CardTecidos>
+            <CardBordado modelo={modelo}></CardBordado>
             <CardObservacoes modelo={modelo}></CardObservacoes>
             <CardODetalhes modelo={modelo}></CardODetalhes>
             <CardTotal modelo={modelo}></CardTotal>
@@ -609,26 +627,54 @@ const CardObservacoes = ({ modelo }) => {
 };
 
 const CardODetalhes = ({ modelo }) => {
+    const dispatch = useDispatch();
     if (!modelo.pedido.observacoes) {
         modelo.pedido.observacoes = [];
     }
+    if (!modelo.pedido.detalhes) {
+        modelo.pedido.detalhes = {};
+    }
+    let sector = "detalhes";
     return (
         <Card style={commonStyles.card}>
             <CardHeader titulo={"Detalhes"}></CardHeader>
             <CardItem>
                 <Body style={commonStyles.cardItemBody}>
                     {modelo.detalhes.map((el, index) => {
+                        let field_obs = el.field + "_obs";
                         return (
-                            <CheckOption
+                            <View
                                 key={index}
-                                data={el}
-                                modelo={modelo}
-                                sector={"detalhes"}
-                            ></CheckOption>
+                                style={{
+                                    flexDirection: "column",
+                                }}
+                            >
+                                <CheckOption
+                                    data={el}
+                                    modelo={modelo}
+                                    sector={sector}
+                                ></CheckOption>
+                            </View>
                         );
                     })}
+                    <ListItem style={{ width: 300 }}>
+                        <Body>
+                            <Label>Observação</Label>
+                            <Textarea
+                                rowSpan={5}
+                                defaultValue={modelo.pedido[sector]["obs"]}
+                                bordered
+                                placeholder=""
+                                onChangeText={(text) => {
+                                    modelo.pedido[sector]["obs"] = text;
+                                    dispatch(setModelo(modelo, modelo.pedido));
+                                }}
+                            />
+                        </Body>
+                    </ListItem>
                 </Body>
             </CardItem>
+
             <CardItem>
                 <View style={{ flexDirection: "column", marginLeft: -30 }}>
                     <Image
@@ -661,78 +707,57 @@ const CardTotal = ({ modelo }) => {
     if (!modelo.pedido.valor_unitario) {
         modelo.pedido.valor_unitario = 0.0;
     }
+    if (!modelo.pedido.totais) {
+        modelo.pedido.totais = [];
+    }
+    const dispatch = useDispatch();
     let somaQuantidade = () => {
-        modelo.pedido.qtd_total = 0;
-        let fields = [
-            "manga_curta",
-            "manga_longa",
-            "masculino",
-            "feminino",
-            "blook",
-            "calca",
-            "calcao",
-        ];
-        if (modelo.pedido.tamanhos) {
-            for (let i = 0; i < modelo.pedido.tamanhos.length; i++) {
-                let qtd = modelo.pedido.tamanhos[i];
-                for (let x = 0; x < fields.length; x++) {
-                    modelo.pedido.qtd_total += qtd[fields[x]]
-                        ? parseFloat(qtd[fields[x]])
-                        : 0;
-                }
-            }
-            if (
-                modelo.pedido &&
-                modelo.pedido.valor_unitario &&
-                modelo.pedido.qtd_total
-            ) {
-                modelo.pedido.valor_total =
-                    modelo.pedido.qtd_total *
-                    parseFloat(modelo.pedido.valor_unitario);
-            }
-            modelo.pedido.qtd_total = modelo.pedido.qtd_total.toString();
-            if (modelo.pedido.valor_total) {
-                modelo.pedido.valor_total =
-                    modelo.pedido.valor_total.toString();
+        modelo.pedido.valor_total = 0.0;
+        modelo.pedido.valor_unitario = 0.0;
+        let qtdTotal = 0.0;
+
+        for (let i = 0; i < modelo.pedido.totais.length; i++) {
+            let obj = modelo.pedido.totais[i];
+            obj["total"] = 0;
+            if (obj.quantidade && obj.unitario) {
+                obj.unitario = parseFloat(
+                    obj.unitario.toString().replace(",", ".")
+                ).toFixed(2);
+                obj["total"] = parseFloat(obj.quantidade) * obj.unitario;
+                qtdTotal += parseFloat(obj.quantidade);
+                modelo.pedido.valor_total += obj["total"];
+                obj.unitario = obj.unitario.toString().replace(".", ",");
+                obj["total"] = obj["total"]
+                    .toFixed(2)
+                    .toString()
+                    .replace(".", ",");
             }
         }
-        somaQuantidadeExtra();
-    };
-    let somaQuantidadeExtra = () => {
-        if (!modelo.pedido.tamanhosExtra) {
-            return;
-        }
-        let fields = modelo.pedido.tamanhosExtra.fields.map((el) => {
-            return el.field;
-        });
-        let tamanhos = modelo.pedido.tamanhosExtra.tamanhos;
-        modelo.pedido.qtd_total = parseFloat(modelo.pedido.qtd_total);
-        if (modelo.pedido.tamanhos) {
-            for (let i = 0; i < tamanhos.length; i++) {
-                let qtd = tamanhos[i];
-                for (let x = 0; x < fields.length; x++) {
-                    modelo.pedido.qtd_total += qtd[fields[x]]
-                        ? parseFloat(qtd[fields[x]])
-                        : 0;
-                }
-            }
-            if (
-                modelo.pedido &&
-                modelo.pedido.valor_unitario &&
-                modelo.pedido.qtd_total
-            ) {
-                modelo.pedido.valor_total =
-                    modelo.pedido.qtd_total *
-                    parseFloat(modelo.pedido.valor_unitario);
-            }
-            modelo.pedido.qtd_total = modelo.pedido.qtd_total.toString();
-            if (modelo.pedido.valor_total) {
-                modelo.pedido.valor_total =
-                    modelo.pedido.valor_total.toString();
-            }
-        }
+        modelo.pedido.qtd_total = qtdTotal;
+        modelo.pedido.valor_unitario = modelo.pedido.valor_total / qtdTotal;
+        modelo.pedido.valor_unitario = modelo.pedido.valor_unitario
+            .toFixed(2)
+            .toString()
+            .replace(".", ",");
+        modelo.pedido.valor_total = modelo.pedido.valor_total
+            .toFixed(2)
+            .toString()
+            .replace(".", ",");
     };
     somaQuantidade();
+    console.log(
+        "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV"
+    );
+    console.log(
+        "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV"
+    );
+    console.log(
+        "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV"
+    );
+    console.log(
+        "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV"
+    );
+    console.log(modelo.pedido);
 
     return (
         <Card style={commonStyles.card}>
@@ -741,23 +766,81 @@ const CardTotal = ({ modelo }) => {
                 <Body style={commonStyles.cardItemBody}>
                     <ListItem style={{ minWidth: 290 }}>
                         <Body>
-                            <View
+                            {modelo.pedido.totais.map((el, index) => {
+                                return (
+                                    <View>
+                                        <View
+                                            style={{
+                                                flexDirection: "row",
+                                                justifyContent: "space-around",
+                                                marginTop: 15,
+                                            }}
+                                        >
+                                            <Label style={{ flex: 3 }}>
+                                                Qtde
+                                            </Label>
+                                            <Label style={{ flex: 4 }}>
+                                                Unitário
+                                            </Label>
+                                            <Label style={{ flex: 4 }}>
+                                                Total
+                                            </Label>
+                                        </View>
+                                        <View
+                                            style={{
+                                                flexDirection: "row",
+                                                justifyContent: "space-between",
+                                                marginTop: 15,
+                                            }}
+                                        >
+                                            <Item regular style={{ flex: 3 }}>
+                                                <CustomInput
+                                                    modelo={modelo}
+                                                    element={el}
+                                                    fieldName={"quantidade"}
+                                                    keyboardType={"numeric"}
+                                                ></CustomInput>
+                                            </Item>
+                                            <Item regular style={{ flex: 4 }}>
+                                                <CustomInput
+                                                    modelo={modelo}
+                                                    element={el}
+                                                    fieldName={"unitario"}
+                                                    keyboardType={"numeric"}
+                                                ></CustomInput>
+                                            </Item>
+                                            <Item regular style={{ flex: 4 }}>
+                                                <CustomInput
+                                                    modelo={modelo}
+                                                    element={el}
+                                                    fieldName={"total"}
+                                                    keyboardType={"numeric"}
+                                                ></CustomInput>
+                                            </Item>
+                                        </View>
+                                    </View>
+                                );
+                            })}
+                            <Button
                                 style={{
-                                    flexDirection: "row",
-                                    justifyContent: "space-around",
-                                    marginTop: 15,
+                                    justifyContent: "center",
+                                    alignSelf: "center",
+                                    backgroundColor:
+                                        commonStyles.colors.buttonGreen,
+                                    borderRadius: 8,
+                                    height: 50,
+                                    marginBottom: 5,
+                                    marginTop: 5,
+                                }}
+                                onPressOut={() => {
+                                    modelo.pedido.totais.push({});
+                                    dispatch(setModelo(modelo, modelo.pedido));
                                 }}
                             >
-                                <Label style={{ flex: 8 }}>Quantidade</Label>
-                            </View>
-                            <Item regular style={{ flex: 8 }}>
-                                <Input
-                                    placeholder=""
-                                    editable={false}
-                                    value={modelo.pedido.qtd_total}
-                                />
-                            </Item>
-
+                                <Text style={{ textAlign: "center" }}>
+                                    ADICIONAR QUANTIDADE
+                                </Text>
+                            </Button>
                             <View
                                 style={{
                                     flexDirection: "row",
@@ -766,26 +849,8 @@ const CardTotal = ({ modelo }) => {
                                 }}
                             >
                                 <Label style={{ flex: 8 }}>
-                                    Valor Unitario
+                                    Valor Total (R$)
                                 </Label>
-                            </View>
-                            <Item regular style={{ flex: 8 }}>
-                                <CustomInput
-                                    modelo={modelo}
-                                    element={modelo.pedido}
-                                    fieldName={"valor_unitario"}
-                                    keyboardType={"numeric"}
-                                ></CustomInput>
-                            </Item>
-
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    justifyContent: "space-around",
-                                    marginTop: 15,
-                                }}
-                            >
-                                <Label style={{ flex: 8 }}>Valor Total</Label>
                             </View>
 
                             <Item regular style={{ flex: 8 }}>

@@ -58,9 +58,11 @@ const Checkout = ({ navigation }) => {
         }
         saveSeller(order.vendedor);
         if (validateOrder(order)) {
-            saveOrder(order);
-            dispatch(setReloadOrders());
-            navigation.navigate("Pedidos");
+            await saveOrder(order);
+            setTimeout(() => {
+                dispatch(setReloadOrders());
+                navigation.navigate("Pedidos");
+            }, 1500);
         }
     };
     console.log("xxxxxxxxxxxxxx DETALHES xxxxxxxxxxxxxxx");
@@ -89,7 +91,7 @@ const Checkout = ({ navigation }) => {
                             marginBottom: 25,
                         }}
                         onPressOut={handleFinishOrder}
-                        // disabled={order.sended}
+                        disabled={order.sended}
                     >
                         <Text style={{ textAlign: "center" }}>
                             FINALIZAR PEDIDO
@@ -258,6 +260,11 @@ const CardItensPedido = ({ navigation }) => {
 const CardPagamento = ({ order }) => {
     const dispatch = useDispatch();
     const options = useSelector((state) => state.pedido.pagamentos);
+    console.log("CardPagamentoCardPagamento");
+    console.log(options);
+    if (!order.pagamento) {
+        order.pagamento = options[0];
+    }
     return (
         <Card style={commonStyles.card}>
             <CardHeader titulo={"Pagamento"}></CardHeader>

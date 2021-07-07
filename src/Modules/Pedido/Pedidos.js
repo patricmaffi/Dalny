@@ -16,6 +16,7 @@ import { sendEmail1, ShowMessage1 } from "../../components/Utils";
 import { useSelector, useDispatch } from "react-redux";
 import {
     clearOrders,
+    deleteOrder,
     fetchOrders,
     generatePedidoPdf,
     getOrders,
@@ -80,9 +81,14 @@ const Pedidos = ({ navigation }) => {
                         marginBottom: 5,
                         marginHorizontal: 50,
                     }}
-                    onPressOut={() => {
-                        clearOrders();
-                        dispatch(setReloadOrders());
+                    onPressOut={async () => {
+                        await clearOrders();
+                        setTimeout(() => {
+                            dispatch(setReloadOrders());
+                        }, 1500);
+                        setTimeout(() => {
+                            dispatch(setReloadOrders());
+                        }, 3000);
                     }}
                 >
                     <Text style={{ textAlign: "center" }}>Limpar Pedidos</Text>
@@ -187,6 +193,22 @@ const CardOrder = ({ navigation, pedidos }) => {
             ]
         );
     };
+    let handleDelete = (order) => {
+        Alert.alert("Atenção", "Tem certeza que deseja excluir?", [
+            {
+                text: "Não",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel",
+            },
+            {
+                text: "Sim",
+                onPress: async () => {
+                    await deleteOrder(order);
+                    dispatch(setReloadOrders());
+                },
+            },
+        ]);
+    };
     let enviarEmail = async (order) => {
         let pdfs = await generatePedidoPdf(order, modelos);
         sendEmail1(
@@ -265,7 +287,7 @@ const CardOrder = ({ navigation, pedidos }) => {
                         </Text>
                         <TouchableOpacity
                             onPress={() => handleSelect(el)}
-                            style={{ width: 50 }}
+                            style={{ width: 40 }}
                         >
                             <Icon
                                 name={
@@ -280,7 +302,7 @@ const CardOrder = ({ navigation, pedidos }) => {
                         </TouchableOpacity>
                         <TouchableOpacity
                             onPress={() => handleConfirmSendEmail(el)}
-                            style={{ width: 50 }}
+                            style={{ width: 40 }}
                         >
                             <Icon
                                 name={
@@ -288,6 +310,19 @@ const CardOrder = ({ navigation, pedidos }) => {
                                         ? "ios-checkmark"
                                         : "ios-mail"
                                 }
+                                style={{
+                                    color: commonStyles.colors.iconColor,
+                                    alignSelf: "center",
+                                    fontSize: 24,
+                                }}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => handleDelete(el)}
+                            style={{ width: 40 }}
+                        >
+                            <Icon
+                                name={"trash"}
                                 style={{
                                     color: commonStyles.colors.iconColor,
                                     alignSelf: "center",

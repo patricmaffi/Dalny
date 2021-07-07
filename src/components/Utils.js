@@ -206,6 +206,14 @@ export const maskCNPJ = (text) => {
     text = text.replace(/^(\d{3})(\d{3})(\d{3})(\d)/, "$1.$2.$3-$4");
     return text;
 };
+export const maskData = (text) => {
+    text = text.replace(/\D/g, "");
+    if (text.length >= 8) {
+        text = text.substring(0, 8);
+    }
+    text = text.replace(/^(\d{2})(\d{2})(\d)/, "$1/$2/$3");
+    return text;
+};
 // export const handleEmail = (url) => {
 //     var Mailer = require("NativeModules").RNMail;
 //     Mailer.mail(

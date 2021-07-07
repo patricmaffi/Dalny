@@ -7,12 +7,14 @@ import {
 } from "react-native-gesture-handler";
 import DefaultStyle from "../style/DefaultStyle";
 import { ShowMessage1 } from "../components/Utils";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { newOrder, setReloadOrders } from "../Modules/Pedido/PedidoAction";
 
 const FooterTabs = ({ navigation, carrinho, user, secondFooter }) => {
     const dispatch = useDispatch();
+    const order = useSelector((state) => state.pedido.order);
     console.log("FOOTER");
+    console.log(order.modelos.length);
     const [wait, setWait] = useState(false);
     let market =
         navigation && navigation.state.params && navigation.state.params.market
@@ -57,17 +59,17 @@ const FooterTabs = ({ navigation, carrinho, user, secondFooter }) => {
                         flexDirection: "row",
                         justifyContent: "space-between",
                         alignItems: "center",
-                        paddingHorizontal: 25,
+                        paddingHorizontal: 75,
                     }}
                 >
                     {makeButton("home", "Dashboard", "Início")}
-                    {makeButton("ios-cube", "Modelo", "Novo", () => {
-                        dispatch(newOrder());
-                    })}
+                    {order.modelos.length == 0
+                        ? null
+                        : makeButton("ios-cube", "Checkout", "Rascunho")}
                     {makeButton("logo-buffer", "Pedidos", "Pedidos", () => {
                         dispatch(setReloadOrders());
                     })}
-                    {makeButton("ios-settings", "Config1", "Conf")}
+                    {/* {makeButton("ios-settings", "Config1", "Conf")} */}
                 </View>
                 <ShowMessage1
                     visible={wait}

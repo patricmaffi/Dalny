@@ -2,7 +2,7 @@
   "expo": {
     "name": "Dalny",
     "slug": "Dalny",
-    "version": "1.0.0",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -21,7 +21,7 @@
     },
     "android": {
       "package": "br.com.ptc.dalny.pedidos",
-      "versionCode": 13,
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

@@ -12,7 +12,13 @@ import calcabrim from "../../../assets/imgs/calcabrim.jpg";
 import calcabrim1 from "../../../assets/imgs/calcabrim1.jpg";
 import moleton from "../../../assets/imgs/moleton.jpg";
 import jaqueta from "../../../assets/imgs/jaqueta.jpg";
-import { maskCNPJ, maskPhone } from "../../components/Utils";
+import touca from "../../../assets/imgs/touca.jpg";
+import touca1 from "../../../assets/imgs/touca1.jpg";
+import macacao from "../../../assets/imgs/macacao.jpg";
+import macacao1 from "../../../assets/imgs/macacao1.jpg";
+import avental from "../../../assets/imgs/avental.jpg";
+import avental1 from "../../../assets/imgs/avental1.jpg";
+import { maskCNPJ, maskData, maskPhone } from "../../components/Utils";
 
 const INITIAL_STATE_PEDIDO = {
     adicao: true,
@@ -43,6 +49,12 @@ const INITIAL_STATE_PEDIDO = {
         },
 
         { field: "endereco", desc: "Endereço", hide: true },
+        {
+            field: "dtentrega",
+            desc: "Data Entrega",
+            mask: maskData,
+            keyboard: "numeric",
+        },
     ],
     pagamentos: ["Cartão", "Pix", "Á Vista", "30 Dias", "30/60", "30/60/90"],
     estoque: "0",
@@ -113,6 +125,7 @@ const INITIAL_STATE_PEDIDO = {
                 { field: "punho_interno", desc: "Punho Interno" },
                 { field: "punho_externo", desc: "Punho Externo" },
                 { field: "vista_interna", desc: "Vista Interna" },
+                { field: "aleta", desc: "Colarinho Aleta" },
             ],
             showSizeOptions: false,
         },
@@ -148,7 +161,8 @@ const INITIAL_STATE_PEDIDO = {
                 { size: 38, tam: "P" },
                 { size: 40, tam: "M" },
                 { size: 42, tam: "G" },
-                { size: 44, tam: "XG" },
+                { size: 44, tam: "GG" },
+                { size: 46, tam: "XG" },
                 { size: 48, tam: "XGG" },
                 { size: 50, tam: "EG" },
                 { size: 52, tam: "EGG" },
@@ -177,6 +191,8 @@ const INITIAL_STATE_PEDIDO = {
             modelo: [
                 { field: "decote_v", desc: "Decote V" },
                 { field: "decote_v_botoes", desc: "Decote V C/Botoes" },
+                { field: "manga_punho", desc: "Manga Longa com Punho" },
+                { field: "manga_barra", desc: "Manga Longa com Barra" },
             ],
             tecido: [
                 { field: "tecido_base", desc: "Tecido Base" },
@@ -202,6 +218,7 @@ const INITIAL_STATE_PEDIDO = {
                 { size: "P" },
                 { size: "M" },
                 { size: "G" },
+                { size: "GG" },
                 { size: "XG" },
                 { size: "XGG" },
                 { size: "EG" },
@@ -235,8 +252,14 @@ const INITIAL_STATE_PEDIDO = {
                 },
                 { field: "barra_aplicada", desc: "Barra Aplicada" },
                 { field: "bolso_peito", desc: "Bolso Peito" },
-                { field: "retilinea_manga", desc: "Retilinea na Manga" },
-                { field: "cor_detalhe", desc: "Na cor do detalhe" },
+                {
+                    field: "retilinea_manga_cpeca",
+                    desc: "Retilinea Manga cor da peça",
+                },
+                {
+                    field: "retilinea_manga_cdet",
+                    desc: "Retilinea Manga cor do detalhe",
+                },
             ],
         },
         {
@@ -268,13 +291,13 @@ const INITIAL_STATE_PEDIDO = {
             tamanhosField: [
                 { field: "masculino", desc: "Masc." },
                 { field: "feminino", desc: "Fem." },
-                { field: "blook", desc: "B.Look" },
             ],
             tamanhos: [
                 { size: "PP" },
                 { size: "P" },
                 { size: "M" },
                 { size: "G" },
+                { size: "GG" },
                 { size: "XG" },
                 { size: "XGG" },
                 { size: "EG" },
@@ -284,14 +307,15 @@ const INITIAL_STATE_PEDIDO = {
                 titulo: "Tamanhos Extra",
                 fields: [{ field: "infantil", desc: "infantil" }],
                 tamanhos: [
-                    { size: "PP" },
-                    { size: "P" },
-                    { size: "M" },
-                    { size: "G" },
-                    { size: "XG" },
-                    { size: "XGG" },
-                    { size: "EG" },
-                    { size: "EGG" },
+                    { size: "1" },
+                    { size: "2" },
+                    { size: "3" },
+                    { size: "4" },
+                    { size: "5" },
+                    { size: "6" },
+                    { size: "7" },
+                    { size: "8" },
+                    { size: "9" },
                 ],
             },
             detalhes: [
@@ -321,6 +345,8 @@ const INITIAL_STATE_PEDIDO = {
                 { field: "manga_longa", desc: "Manga Longa" },
                 { field: "jaleco_curto_polo", desc: "Jaleco Curto Polo" },
                 { field: "jaleco_longo", desc: "Jaleco Longo" },
+                { field: "gola_esporte", desc: "Gola Esporte" },
+                { field: "gola_padre", desc: "Gola Padre" },
             ],
             tecido: [
                 { field: "tecido_base", desc: "Tecido Base" },
@@ -340,13 +366,13 @@ const INITIAL_STATE_PEDIDO = {
             tamanhosField: [
                 { field: "masculino", desc: "Masc." },
                 { field: "feminino", desc: "Fem." },
-                { field: "blook", desc: "B.Look" },
             ],
             tamanhos: [
                 { size: "PP" },
                 { size: "P" },
                 { size: "M" },
                 { size: "G" },
+                { size: "GG" },
                 { size: "XG" },
                 { size: "XGG" },
                 { size: "EG" },
@@ -359,7 +385,7 @@ const INITIAL_STATE_PEDIDO = {
                 { field: "peitilho_externo", desc: "Peitilho Externo" },
                 { field: "vivo_manga", desc: "Vivo na Manga" },
                 { field: "botao_escondido", desc: "Botao Escondido" },
-                { field: "barra_bolso_detalhe", desc: "barra_bolso_detalhe" },
+                { field: "barra_bolso_detalhe", desc: "Barra bolso detalhe" },
                 { field: "vista_interna", desc: "Vista Interna" },
                 {
                     field: "barra_manga_sobreposta",
@@ -371,6 +397,7 @@ const INITIAL_STATE_PEDIDO = {
                 },
                 { field: "barra_aplicada", desc: "Barra Manga Aplicada" },
                 { field: "bolso_peito", desc: "Bolso Peito" },
+                { field: "bolso_cintura", desc: "Bolso Cintura" },
                 {
                     field: "faixa_refletiva_cintura",
                     desc: "Faixa Refletiva Cintura",
@@ -401,12 +428,12 @@ const INITIAL_STATE_PEDIDO = {
             ],
             isSerigrafia: true,
             bordado: [
-                { field: "bolso_esq", desc: "Bolso Esq." },
-                { field: "frente_esq", desc: "Frente Esq." },
-                { field: "frente_drt", desc: "Frente Drt." },
-                { field: "pala", desc: "Pala" },
-                { field: "manga_esq", desc: "Manga Esq." },
-                { field: "manga_drt", desc: "Manga Drt." },
+                { field: "bolso_fd", desc: "Bolso frente direita" },
+                { field: "bolso_fe", desc: "Bolso frente esquerda" },
+                { field: "bolso_td", desc: "Bolso traseiro direito" },
+                { field: "bolso_te", desc: "Bolso traseiro esquerdo" },
+                { field: "bolso_ad", desc: "Bolso adicional direito" },
+                { field: "bolso_ae", desc: "Bolso adicional esquerdo" },
             ],
             tamanhosField: [
                 { field: "calca", desc: "Calça" },
@@ -418,7 +445,8 @@ const INITIAL_STATE_PEDIDO = {
                 { size: 38, tam: "P" },
                 { size: 40, tam: "M" },
                 { size: 42, tam: "G" },
-                { size: 44, tam: "XG" },
+                { size: 44, tam: "GG" },
+                { size: 46, tam: "XG" },
                 { size: 48, tam: "XGG" },
                 { size: 50, tam: "EG" },
                 { size: 52, tam: "EGG" },
@@ -464,26 +492,17 @@ const INITIAL_STATE_PEDIDO = {
                 { size: "P" },
                 { size: "M" },
                 { size: "G" },
+                { size: "GG" },
                 { size: "XG" },
                 { size: "XGG" },
                 { size: "EG" },
                 { size: "EGG" },
             ],
             detalhes: [
-                { field: "vies_gola", desc: "Viés na gola" },
-                { field: "gola_externa", desc: "Gola externa" },
-                { field: "peitilho_interno", desc: "Peitilho Interno" },
-                { field: "peitilho_externo", desc: "Peitilho Externo" },
-                { field: "cor_botoes", desc: "Cor dos Botões" },
-                { field: "vivo_manga", desc: "Vivo na Manga" },
-                {
-                    field: "barra_manga_sobreposta",
-                    desc: "Barra Manga Sobreposta",
-                },
-                { field: "barra_aplicada", desc: "Barra Aplicada" },
-                { field: "bolso_peito", desc: "Bolso Peito" },
-                { field: "retilinea_manga", desc: "Retilinea na Manga" },
-                { field: "cor_detalhe", desc: "Na cor do detalhe" },
+                { field: "com_touca", desc: "Com touca" },
+                { field: "manga_punho", desc: "Manga com punho" },
+                { field: "manga_barra", desc: "Manga com barra" },
+                { field: "bolso_canguru", desc: "Bolso Canguru" },
             ],
         },
         {
@@ -492,7 +511,8 @@ const INITIAL_STATE_PEDIDO = {
             frente: jaqueta,
             modelo: [
                 { field: "matelado", desc: "Matelado" },
-                { field: "lisa", desc: "Lisa" },
+                { field: "liso", desc: "Liso" },
+                { field: "liso_imp", desc: "Liso impermeável" },
             ],
             tecido: [
                 { field: "tecido_base", desc: "Tecido Base" },
@@ -516,19 +536,134 @@ const INITIAL_STATE_PEDIDO = {
                 { size: "P" },
                 { size: "M" },
                 { size: "G" },
+                { size: "GG" },
                 { size: "XG" },
                 { size: "XGG" },
                 { size: "EG" },
                 { size: "EGG" },
             ],
             detalhes: [
-                { field: "vies_duplo_ziper", desc: "Viés duplo Ziper" },
-                { field: "ziper_escondido", desc: "Ziper Escondido" },
-                { field: "punho_interno", desc: "Punho Interno" },
-                { field: "punho_externo", desc: "Punho Externo" },
-                { field: "barra_s_punho", desc: "Barra S/ Punho" },
-                { field: "vies_elastico", desc: "Viés Com Elástico" },
+                { field: "vies_duplo_ziper", desc: "Viés duplo zíper" },
+                { field: "ziper_escondido", desc: "Ziper escondido" },
+                { field: "punho_interno", desc: "Manga punho interno" },
+                { field: "punho_externo", desc: "Manga punho externo" },
+                { field: "manga_vies", desc: "Manga com viés" },
+                { field: "manga_barra", desc: "Manga com barra" },
+                { field: "jaqueta_vies", desc: "Jaqueta com viés" },
+                { field: "jaqueta_barra", desc: "Jaqueta com barra" },
             ],
+        },
+
+        {
+            codigo: 10,
+            descricao: "Macacão",
+            frente: macacao,
+            verso: macacao1,
+            modelo: [
+                { field: "manga_curta", desc: "Manga Curta" },
+                { field: "manga_longa", desc: "Manga Longa" },
+                { field: "sport", desc: "Gola Sport" },
+                { field: "padre", desc: "Gola Padre" },
+            ],
+            tecido: [
+                { field: "tecido_base", desc: "Tecido Base" },
+                { field: "cor_tecido_base", desc: "Cor" },
+            ],
+            isSerigrafia: true,
+            bordado: [
+                { field: "bolso_esq", desc: "Bolso Esq." },
+                { field: "frente_esq", desc: "Frente Esq." },
+                { field: "frente_drt", desc: "Frente Drt." },
+                { field: "pala", desc: "Pala" },
+                { field: "manga_esq", desc: "Manga Esq." },
+                { field: "manga_drt", desc: "Manga Drt." },
+                { field: "bolso_adc", desc: "Bolso Adc" },
+            ],
+            tamanhosField: [
+                { field: "MC", desc: "MC" },
+                { field: "ML", desc: "ML" },
+            ],
+            tamanhos: [
+                { size: "PP" },
+                { size: "P" },
+                { size: "M" },
+                { size: "G" },
+                { size: "GG" },
+                { size: "XG" },
+                { size: "XGG" },
+                { size: "EG" },
+                { size: "EGG" },
+            ],
+
+            detalhes: [
+                { field: "botao_escondido", desc: "Botão Escondido" },
+                { field: "bolso_peito", desc: "Bolso Peito" },
+                {
+                    field: "faixa_reflexiva_manga",
+                    desc: "Faixa Reflexiva Mangas",
+                },
+                { field: "bolso_adicional", desc: "Bolso Adicional" },
+                { field: "reforco_pernas", desc: "Reforço entre pernas" },
+                { field: "bolso_estendido", desc: "Bolso Estendido" },
+                {
+                    field: "reforco_interno_joelho",
+                    desc: "Reforço Interno Joelho",
+                },
+                { field: "faixa_refletiva", desc: "Faixa Refletiva" },
+            ],
+        },
+        {
+            codigo: 9,
+            descricao: "Touca",
+            frente: touca,
+            verso: touca1,
+            modelo: [
+                { field: "bandana", desc: "Modelo Bandana" },
+                { field: "padaria", desc: "Modelo Padaria" },
+                { field: "chef", desc: "Modelo Chef" },
+                { field: "industrial", desc: "Modelo Industrial" },
+            ],
+            tecido: [
+                { field: "tecido_base", desc: "Tecido Base" },
+                { field: "cor_tecido_base", desc: "Cor" },
+                { field: "tecido_detalhe", desc: "Tecido Detalhes" },
+                { field: "cor_tecido_detalhe", desc: "Cor" },
+            ],
+            isSerigrafia: true,
+            bordado: [
+                { field: "bolso_esq", desc: "Frente" },
+                { field: "lado_esq", desc: "Lado Esq." },
+                { field: "lado_drt", desc: "Lado Drt." },
+            ],
+
+            detalhes: [
+                { field: "vivo_superior", desc: "Vivo Superior" },
+                { field: "vivo_inferior", desc: "Vivo Inferior" },
+                { field: "velcro", desc: "Com Velcro" },
+            ],
+        },
+        {
+            codigo: 11,
+            descricao: "Avental",
+            frente: avental,
+            verso: avental1,
+            modelo: [
+                { field: "inteiro", desc: "Avental Inteiro" },
+                { field: "saia", desc: "Avental Saia" },
+            ],
+            tecido: [
+                { field: "tecido_base", desc: "Tecido Base" },
+                { field: "cor_tecido_base", desc: "Cor" },
+                { field: "tecido_detalhe", desc: "Tecido Detalhes" },
+                { field: "cor_tecido_detalhe", desc: "Cor" },
+            ],
+            isSerigrafia: true,
+            bordado: [
+                { field: "peito", desc: "Peito" },
+                { field: "bolso_frente", desc: "Bolso Frente" },
+            ],
+
+            detalhes: [{ field: "bolso_frente", desc: "Bolso Frente" }],
         },
     ],
 };
