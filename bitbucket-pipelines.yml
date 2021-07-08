@@ -1,4 +1,4 @@
-image: ptc/dalny # Choose an image matching your project needs
+image: ptc/dalny-pedidos # Choose an image matching your project needs
 
 clone:
     depth: full # SonarCloud scanner needs the full history to assign issues properly
@@ -25,9 +25,12 @@ definitions:
 pipelines: # More info here: https://confluence.atlassian.com/bitbucket/configure-bitbucket-pipelines-yml-792298910.html
     branches:
         master:
-            - step: *build-test-sonarcloud
-            - step: *check-quality-gate-sonarcloud
+          -
+            - step: 
+              script:
+                - npm install
+                - npm build
     pull-requests:
         "**":
-            - step: *build-test-sonarcloud
-            - step: *check-quality-gate-sonarcloud
+          -script:
+            - npm install
