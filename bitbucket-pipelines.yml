@@ -1,14 +1,8 @@
 image: node:15 # Choose an image matching your project needs
 
 pipelines: # More info here: https://confluence.atlassian.com/bitbucket/configure-bitbucket-pipelines-yml-792298910.html
-    branches:
-        master:
-          -
-            - step: 
-              script:
-                - npm install
-                - npm build
-    pull-requests:
-        "**":
-          -script:
-            - npm install
+    default:
+      - step: 
+          script:
+              - npm install
+              - npm build
